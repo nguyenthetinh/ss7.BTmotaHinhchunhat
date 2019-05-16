@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<canvas id="myCanvas" width="500px" height="500px" style="border: 1px solid lightgrey"></canvas>
+<p top="500px" id="rs"></p>
+<script>
+    let c=document.getElementById("myCanvas");
+    let ctx= c.getContext('2d');
+
+    function Rectangle(dai, rong){
+        this.dai=dai;
+        this.rong=rong;
+        this.chuvi=function () {
+            return (this.dai+this.rong)*2;
+        };
+        this.dientich=function () {
+            return dai*rong
+        };
+        this.update=function () {
+
+        };
+        this.hcn=function (x1,y1) {
+            ctx.beginPath();
+            ctx.moveTo(x1 , y1);
+            ctx.lineTo(x1 + this.dai , y1);
+            ctx.lineTo(x1 + this.dai , y1 + this.rong);
+            ctx.lineTo(x1 , this.rong + y1);
+            ctx.lineTo(x1 , y1);
+            ctx.fillStyle="rgb(0,16,150)";
+            ctx.fill();
+        }
+
+    }
+    let chieudai=Number(prompt("Nhap chieu dai:"));
+    let chieurong=Number(prompt("Nhap chieu rong:"))
+    let Vdai=5;
+    let Vrong=3;
+    let x=5;
+    let y=3;
+    let rectangle=new Rectangle(chieudai,chieurong);
+    let t=rectangle.chuvi();
+    let s=rectangle.dientich();
+    document.getElementById("rs").innerHTML="chuvi= "+t +"<br>"+"dien tich= "+s;
+    function chuyendong() {
+        ctx.clearRect(0,0,c.width,c.height);
+        x +=Vdai;
+        y +=Vrong;
+        if (x >420 || x <0 ) Vdai =-Vdai;
+        if (y >420 || y <0 ) Vrong =-Vrong;
+        rectangle.hcn(x,y);
+    }
+    setInterval("chuyendong()",20);
+</script>
+</body>
+</html>
